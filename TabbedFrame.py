@@ -128,7 +128,6 @@ class TabbedFrame(DirectFrame):
                                    DirectButton, (self,),
                                    command = self.setPage, text = pageName, extraArgs = [pageIndex],
                                    **self.tabArgs)
-        print (self["tab_scale"], btn["scale"])
 
         return btn
     
