@@ -23,6 +23,8 @@ from panda3d.core import TextNode, NodePath
 
 from TabbedFrame import TabbedFrame
 
+import random
+
 class TabbedFrameExample(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
@@ -38,7 +40,7 @@ class TabbedFrameExample(ShowBase):
         # Our first "page". This will hold some text.
         page1 = DirectFrame()
         text = TextNode("text")
-        text.setText("Press \"Space\" to resize the frame!\n\nPress \"escape\" to close this example-program.")
+        text.setText("Press \"Space\" to resize the frame!\n\nPress \"shift\" to teleport the frame!\n\nPress \"ctrl\" to scale the frame!\n\nPress \"escape\" to close this example-program.")
         text.setWordwrap(15)
         text.setTextColor(0, 0, 0, 1)
         textNP = NodePath(text)
@@ -62,7 +64,15 @@ class TabbedFrameExample(ShowBase):
 
         # A few events: one to change our TabbedFrame's size, and one to quit
         self.accept("space", self.resizeTabbedFrame)
+        self.accept("shift", self.moveTabbedFrame)
+        self.accept("control", self.scaleTabbedFrame)
         self.accept("escape", self.userExit)
+
+    def moveTabbedFrame(self):
+        self.frame.setPos(random.uniform(-1, 1), 0, random.uniform(-1, 1))
+
+    def scaleTabbedFrame(self):
+        self.frame.setScale(self.frame.getSx() - 0.1)
 
     def resizeTabbedFrame(self):
         size = self.frame["frameSize"]

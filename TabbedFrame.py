@@ -125,7 +125,7 @@ class TabbedFrame(DirectFrame):
     
     def makeButton(self, pageName, pageIndex):
         btn = self.createcomponent("tab%d" % len(self.pageButtons), (), "tab",
-                                   DirectButton,
+                                   DirectButton, (self,),
                                    command = self.setPage, text = pageName, extraArgs = [pageIndex],
                                    **self.tabArgs)
         print (self["tab_scale"], btn["scale"])
