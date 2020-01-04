@@ -21,7 +21,7 @@
 
 import direct.gui.DirectGuiGlobals as DGG
 from direct.gui.DirectGui import DirectFrame, DirectScrolledFrame, DirectButton
-from panda3d.core import NodePath, PandaNode, TextNode, Vec4, TextureStage, Texture
+from panda3d.core import NodePath, PandaNode, TextNode, Vec4, TextureStage, Texture, VBase3
 
 import types, collections
 
@@ -228,6 +228,9 @@ class TabbedFrame(DirectFrame):
     def layoutButtons(self):
         width = self["tab_frameSize"][1] - self["tab_frameSize"][0]
         buttonScale = self["tab_scale"]
+        if isinstance(buttonScale, tuple) or isinstance(buttonScale, list) or \
+                isinstance(buttonScale, VBase3) or hasattr(buttonScale, "__getitem__"):
+            buttonScale = buttonScale[0]
 
         for pageIndex, button in enumerate(self.pageButtons):
             bounds = self["frameSize"]
